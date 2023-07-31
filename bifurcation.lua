@@ -1,15 +1,19 @@
 local bifurcation = {}
+
+---@param saw Saw
 function bifurcation.start(saw)
     saw.color = violet
-    setProperty(saw.id, "destroy", false)
+    saw.setProperty("destroy", false)
 end
+
+---@param saw Saw
 function bifurcation.update(saw, delta)
     local x = saw.posX
     local y = saw.posY
     local cond = true
     local destCond = false
     local dirX = saw.dir.x
-    local dest = getProperty(saw.id, "destroy")
+    local dest = saw.getProperty("destroy")
     local border = 0.3
     if dirX ~= 0 then 
         cond = x > -border and x < border
@@ -31,6 +35,6 @@ function bifurcation.update(saw, delta)
         else
             saw2.dir = vec2(-1, 1)
         end
-        setProperty(saw.id, "destroy", true)
+        saw.setProperty("destroy", true)
     end
 end
